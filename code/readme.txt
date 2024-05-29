@@ -1,1 +1,1 @@
-Relevant code from project
+Her har vi samlet koden der bliver brugt til at træne den logistisk model og vores neurale netværk. Siden vi ikke har tilladelse til at videregive data kan det ikke bruges til mere end at se hvordan vi kom frem til vores modeller og resultater.
