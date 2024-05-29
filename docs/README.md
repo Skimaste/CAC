@@ -2,11 +2,11 @@
 
 ## Projektbeskrivelse
 
-Dette repository indeholder koden og dokumentationen til projektet med titlen "Koronararterieforkalkning," udviklet af Frederik Nordberg Jensen, Emil Juul Elberg og Jonas Sadeghi Knudsen i april 2024.
+Dette repository indeholder koden og de tilhørende modeller til projektet "Koronararterieforkalning" lavet af Frederik Nordberg Jensen, Emil Juul Elberg og Jonas Sadeghi Knudsen.
 
 ### Overblik
 
-Projektet fokuserer på at analysere CT-scanningsdata af kvinder, der gennemgår behandling for brystkræft. Formålet er specifikt at vurdere tilstanden af koronararterieforkalkning (CAC) ud fra disse scanninger og tilnærme patienternes Agatston-score. Agatston-scoren er en måleenhed inden for kardiologi, der angiver den samlede volumen og densitet af calciumaflejringer i hjertets arterier. En højere Agatston-score indikerer en større risiko for hjerteproblemer.
+Projektet fokuserer på at lave opportunistisk screening ved at analysere CT-scanningsdata af kvinder, der gennemgår behandling for brystkræft. Målet er, ved brug af machine learning, at vurdere tilstanden af koronararterieforkalkning (åreforkalkning i hjertet) ud fra denne data og tilnærme patienternes Agatston-score. Agatston-scoren er en måleenhed inden for kardiologi, der angiver den samlede volumen og densitet af calciumaflejringer i hjertets arterier. En højere Agatston-score indikerer en større risiko for hjerteproblemer.
 
 Udover den medfødte risiko kan koronararterieforkalkning give udfordringer under strålebehandling for brystkræft. Hvis de ydre arterier i hjertet er forkalkede, øges risikoen for hjertesygdomme betydeligt på grund af udsættelse for stråling. Derfor kan tilpasning af strålebehandlingen være gavnlig i visse tilfælde.
 
