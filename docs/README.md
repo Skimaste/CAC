@@ -14,11 +14,11 @@ Dog er evaluering af koronar forkalkning ikke en standardpraksis i denne sammenh
 
 ### Videnskabelig problemformulering
 
-Det primære mål er at udvikle en model, der kan forudsige brystkræftpatienters Agatston-score nøjagtigt og kategorisere dem i en af fem risikokategorier baseret på scoren. Lineære modeller har vist sig utilstrækkelige til denne opgave, da forholdet mellem Agatston-scoren og data er ikke-lineært. For at imødekomme dette trænes et neuralt netværk til at forudsige Agatston-scoren, hvilket udnytter dets ikke-lineære egenskaber og potentiale for finjustering baseret på brugen.
+Det primære mål er at udvikle en model, der kan forudsige brystkræftpatienters Agatston-score nøjagtigt og kategorisere dem i to risikokategorier baseret på scoren. Her har vi først forsøgt os med en logistisk model og efterfølgende et neuralt netværk til at forudsige hvilken af de to kategorier de høre til.
 
 ### Beskrivelse af data
 
-Datasættet består af automatisk udtrukne oplysninger fra cirka 1300 CT-scanninger af brystkræftpatienter. Disse scanninger består af hundreder af 2D tværsnit eller "skiver". En maskine har automatisk behandlet disse skiver for hver patient, segmenteret hjertet og identificeret pixels med en Houndsfield-enhed (HU) større end 130. HU er en måleenhed for radiodensitet i en CT-scanning, hvor pixels med lav HU svarer til blødt væv og muskelmasse, mens calcium og knoglemasse har en HU større end 130. Derudover er der manuelt afledte funktioner, herunder Agatston-scoren, tildelt af en vejledende kliniker baseret på en grundig undersøgelse af CT-billederne.
+Datasættet består af automatisk udtrukne oplysninger fra cirka 1300 CT-scanninger af brystkræftpatienter. Disse scanninger består af hundreder af 2D tværsnit eller "slices". En maskine har automatisk behandlet disse slices for hver patient, segmenteret hjertet og identificeret pixels med en Houndsfield-enhed (HU) større end 130. HU er en måleenhed for radiodensitet i en CT-scanning, hvor pixels med lav HU svarer til blødt væv og muskelmasse, mens calcium og knoglemasse har en HU større end 130. Derudover er der manuelt afledte funktioner, herunder Agatston-scoren, tildelt af en vejledende kliniker baseret på en grundig undersøgelse af CT-billederne.
 
 ### Udfordringer med data
 
@@ -33,7 +33,6 @@ Det primære mål er at give en pålidelig indikation af tilstedeværelsen af ko
 Repositoryet er struktureret som følger:
 
 - `code/`: Indeholder koden til dataforbehandling, modeltræning og evaluering.
-- `data/`: Indeholder datasættet, der bruges til træning og test af modellerne.
 - `docs/`: Indeholder projektets dokumentation, herunder denne README-fil.
 - `results/`: Gemmer resultaterne af modelvurderinger og eventuelle visualiseringer.
 - `models/`: Gemmer trænede modeller til fremtidig brug.
