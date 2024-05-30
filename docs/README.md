@@ -159,6 +159,8 @@ Vi ser heraf at standardstyken på 0.01 giver et meget godt tradeoff mellem lav 
 
 Vi har derudover fundet, at det optimale antal neuroner i de skjulte lag er henholdsvis 32 og 16. Til slut har vi valgt at sænke learning rate til 0.0002 og øget antal af epochs til 1000. Med disse optimeringer får vi følgende kurver for vores færdige model:
 
+![final_loss](https://github.com/Skimaste/CAC/assets/132779543/d156e563-18e3-454c-b15f-116b16dc7ff2)
+
 
 
 
