@@ -32,11 +32,15 @@ Gennem vores projekt
 
 Vi merger vores datasæt på patient id, for at få total score og hvilke slices der er i hjertet for hver patient.
 
-vi kigger på listen af pixels for hver læsion og finder min, max og mean af pixelværdierne(hounsfield units)
+vi kigger på listen af pixels for hver læsion og finder min, max og mean af pixelværdierne (hounsfield units)
 
 
 
 ### PCA
+Vores eksplorative data analyse består i en PCA på vores dataframe med information fra kun én læsion per patient for lettere fortolkning.
+Vi får heraf følgende scree plot:
+![Scree Plot](images/Explained_variance.png)
+
 
 ### Logistisk regression
 
