@@ -160,6 +160,12 @@ Vi ser heraf at standardstyken på 0.01 giver et meget godt tradeoff mellem lav 
 Vi har derudover fundet, at det optimale antal neuroner i de skjulte lag er henholdsvis 32 og 16. Til slut har vi valgt at sænke learning rate til 0.0002 og øget antal af epochs til 1000. Med disse optimeringer får vi følgende kurver for vores færdige model:
 
 ![final_loss](https://github.com/Skimaste/CAC/assets/132779543/d156e563-18e3-454c-b15f-116b16dc7ff2)
+![final_acc](https://github.com/Skimaste/CAC/assets/132779543/1e7c0129-b7c3-463e-985f-0ca4290e1976)
+
+Disse hyperparametre giver en pæn og stabil kurve i både loss og accuracy, og der ses ingen tegn på overfitting.
+Vi vil nu, på samme vis som i logistisk regression, vælge den optimale cutoff værdi:
+
+
 
 
 
