@@ -34,6 +34,36 @@ Vi merger vores datasæt på patient id, for at få total score og hvilke slices
 
 vi kigger på listen af pixels for hver læsion og finder min, max og mean af pixelværdierne (hounsfield units)
 
+Data er givet ved tre forskellige CSV filer, som alle har patient_id som primær index. 
+
+Da data ikke er optimal i forhold til at lave og træne modeller på, valgte vi at transformere vores data til en samlet dataframe med en linje for hver patient. Her har vi også valgt at gøre det frit hvor mange læsioner, startende fra den største, man vil have med for hver patient. 
+
+For hver patient er der først inkluderet syv datapunkter, som er afhængige af patienten og ikke den specifikke læsion:
+
+patient_id: identificerer den specifikke patient (ikke CPR-nr)
+total_score: Agatston score
+label: 1 hvis total_score ≥ 100 og 0 hvis total_score < 100
+total_hhua_pixels: antal hhua (high Hounsfield unit area) pixels over 130
+cts_with_cac: slices fra scanningen hvor der er læsioner
+slice_thickness: fysiske distance mellem hvert slice i mm (vi fjerner alle data punkter hvor scanning har en slice_thickness = 5)
+pixel_spacing_1: fysiske sidelængde på hver pixel i mm
+
+(pixels er kvadratiske, derfor er kun en sidelængde nødvendig)
+
+Herefter tilføjes der, for hver læsion valgt med, 11 datapunkter til linjen for hver patient:
+
+hhua_i_area: Arealet af den i’te største læsion hos en patient udregnet ved
+	antal pixels i den givne læsion ganget med kvadratet af pixel_spacing_1
+hhua_i_dist_x1: afstanden (i mm) fra centrum af den givne læsion til venstre kant af kassen, vi har afsat omkring hjertet
+hhua_i_dist_x2: afstanden (i mm) fra centrum af den givne læsion til højre kant af kassen, vi har afsat omkring hjertet
+hhua_i_dist_y1: afstanden (i mm) fra centrum af den givne læsion til bunden af kassen, vi har afsat omkring hjertet
+hhua_i_dist_y2: afstanden (i mm) fra centeret af den givne læsion til toppen af kassen, vi har afsat omkring hjertet
+hhua_i_dist_z1: afstanden (i mm) fra centrum af den givne læsion til toppen af hjertet. Dette gøres ved (max(ct_numbers_in_heart) - hhua_i_ct_number) · slice_thickness
+hhua_i_dist_z2: afstanden (i mm) fra centrum af den givne læsion til bunden af hjertet. Dette gøres ved (min(ct_numbers_in_heart) - hhua_i_ct_number) · slice_thickness
+hhua_i_ct_number: på hvilket slice denne læsion er
+hhua_i_max_pixel_value: højeste pixel-værdi (hounsfield unit) for denne læsion
+hhua_i_mean_pixel_value: gennemsnitlige pixel-værdi (hounsfield unit) for denne læsion
+hhua_i_min_pixel_value: laveste pixel-værdi (hounsfield unit) for denne læsion
 
 
 ### PCA
