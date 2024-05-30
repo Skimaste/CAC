@@ -6,49 +6,41 @@ Dette repository indeholder koden og de tilhørende modeller til projektet "Koro
 
 ### Overblik
 
-Projektet fokuserer på at lave opportunistisk screening ved at analysere CT-scanningsdata af kvinder, der gennemgår behandling for brystkræft. Målet er, ved brug af machine learning, at vurdere graden af koronararterieforkalkning (åreforkalkning i hjertet) ud fra disse billeddata og tilnærme patienternes Agatston-score. Agatston-scoren er en måleenhed inden for kardiologi, der angiver den samlede volumen og densitet af kalkaflejringer i hjertets arterier. En højere Agatston-score indikerer en større risiko for hjerteproblemer.
+Projektet fokuserer på at lave opportunistisk screening ved at analysere CT-scanningsdata af kvinder, der gennemgår behandling for brystkræft. Målet er at udvikle en machine learning model, som kan prædiktere graden af koronararterieforkalkning (åreforkalkning i hjertet) ud fra disse data og tilnærme patienternes Agatston-score. Agatston-scoren er en måleenhed inden for kardiologi, der angiver den samlede volumen og densitet af kalkaflejringer i hjertets arterier. En højere Agatston-score indikerer en større risiko for hjerteproblemer.
 
-Udover den medfødte risiko kan koronararterieforkalkning give udfordringer under strålebehandling for brystkræft. Hvis de ydre arterier i hjertet er forkalkede, øges risikoen for hjertesygdomme betydeligt på grund af udsættelse for stråling. Derfor kan tilpasning af strålebehandlingen være gavnlig i visse tilfælde.
-
-Dog er evaluering af koronar forkalkning ikke en standardpraksis i denne sammenhæng på grund af dens opfattede irrelevans og den ressourcekrævende manuelle proces. Projektet sigter mod at automatisere denne evaluering for at give yderligere information, som klinikere kan overveje under behandlingsplanlægning, samtidig med at patienterne informeres om deres hjertetilstand uden behov for en separat hjerte-CT-scanning.
+Evaluering af de brystkræftramte patienters grad af åreforkalkning er ikke en standardpraksis i denne sammenhæng grundet den ressourcekrævende manuelle proces som det indebærer. Dette projekt sigter dermed mod at automatisere denne evaluering, sådan at klinikere kan informere patienterne omkring deres hjertetilstand, og henvise dem til yderligere behandling såfremt det er nødvendigt. 
 
 ### Videnskabelig problemformulering
 
-Det primære mål er at udvikle en model, der kan forudsige brystkræftpatienters Agatston-score og kategorisere dem i to risikokategorier baseret på scoren. Her har vi først forsøgt os med en logistisk model og efterfølgende et neuralt netværk til at forudsige hvilken af de to kategorier de hører til.
+Det primære mål er at udvikle en model, der kan prædiktere tilstedeværelsen af åreforkalkning i hjertet. Patienterne er blevet indelt i to grupper ud fra deres manuelt udledte agatston score: 0 hvis deres agatston score er < 100, ellers 1. Herved kan vores problem beskrives som et binært klassifikationsproblem. Vi har først forsøgt os med en logistisk model, og med erfaringerne herfra har vi efterfølgende opbygget et neuralt netværk til at forudsige hvilken af de to kategorier patienterne hører til.
 
 ### Beskrivelse af data
 
-Datasættet består af automatisk udtrukne data fra cirka 1300 CT-scanninger af brystkræftpatienter. Disse scanninger består af hundredevis af 2D tværsnit eller "slices". En model har automatisk behandlet disse slices for hver patient, segmenteret hjertet og identificeret pixels med en Houndsfield-enhed (HU) større end 130. HU er en måleenhed for radiodensitet i en CT-scanning, hvor pixels med lav HU svarer til blødt væv og muskelmasse, mens calcium og knoglemasse har en HU større end 130. Derudover er der manuelt afledte features, herunder Agatston-scoren, tildelt af en vejledende kliniker baseret på en grundig undersøgelse af CT-billederne.
+Datasættet består af automatisk udtrukne data fra cirka 1300 CT-scanninger af brystkræft-ramte patienter. Disse CT-scanninger består af en række 2D tværsnit som vi kalder "slices". En model har for hver patient automatisk behandlet disse slices ved at segmentere hjertet og identificere pixels med en Houndsfield-unit (HU) større end 130. HU er en måleenhed for radiodensitet i en CT-scanning, hvor pixels med lav HU svarer til blødt væv og muskelmasse, mens calcium og knoglemasse har en HU større end 130 (se projektbeskrivelse for yderligere detaljer). Derudover har vi for hver patient adgang til deres estimerede Agatston-score, tildelt af en vejledende kliniker baseret på en grundig manuel undersøgelse af CT-billederne.
 
 ### Udfordringer med data
 
-Udfordringer opstår, fordi CT-scanningerne ikke er blevet taget specifikt til dette formål, hvilket fører til varierende klarhed af hjertet sammenlignet med standard hjerte-CT-scanninger. Problemer såsom bevægelsesartefakter og forvrængninger fra medicinske implantater (f.eks. pacemaker) kan påvirke nøjagtigheden af den automatiske funktionsekstraktionsproces og potentielt føre til falske positive for koronar forkalkning.
+En række af udfordringer opstår, fordi CT-scanningerne ikke er blevet taget specifikt til dette formål, hvilket fører til varierende klarhed af hjertet sammenlignet med standard hjerte-CT-scanninger. Problemer såsom bevægelsesartefakter og forvrængninger fra medicinske implantater (eksemplevis en pacemaker) kan påvirke nøjagtigheden af den automatiske identificering af relevante pixels, hvilket potentielt set kan føre til falske positive prædikationer i vores modeller.
 
 ## Gennemgang af projekt og tilhørende resultater 
 
 ### Data pipeline
 
-Vi merger vores datasæt på patient id, for at få total score og hvilke slices der er i hjertet for hver patient.
+Da data ikke er optimal i forhold til at lave og træne modeller på, er vi nødt til først at transformere vores data til et samlet dataframe med én række af features for hver patient. Vi kan her vælge hvor mange læsioner vi ønsker at inkludere data fra. Læsionerne er sorteret efter antallet af relevante pixels heri, sådan at de vigtigste læsioner kommer først.
 
-vi kigger på listen af pixels for hver læsion og finder min, max og mean af pixelværdierne (hounsfield units)
-
-Data er givet ved tre forskellige CSV filer, som alle har patient_id som primær index. 
-
-Da data ikke er optimal i forhold til at lave og træne modeller på, valgte vi at transformere vores data til en samlet dataframe med en linje for hver patient. Her har vi også valgt at gøre det frit hvor mange læsioner, startende fra den største, man vil have med for hver patient. 
-
-For hver patient er der først inkluderet syv datapunkter, som er afhængige af patienten og ikke den specifikke læsion:
+For hver patient er der først inkluderet syv kolonner, som er afhængige af patienten og ikke den specifikke læsion:
 
 * patient_id: identificerer den specifikke patient (ikke CPR-nr)
 * total_score: Agatston score
 * label: 1 hvis total_score ≥ 100 og 0 hvis total_score < 100
-* total_hhua_pixels: antal hhua (high Hounsfield unit area) pixels over 130
+* total_hhua_pixels: det totale antal af pixels med en HU over 130 i patientens CT-scanning på tværs af alle slices.
 * cts_with_cac: slices fra scanningen hvor der er læsioner
-* slice_thickness: fysiske distance mellem hvert slice i mm (vi fjerner alle data punkter hvor scanning har en slice_thickness = 5)
+* slice_thickness: fysiske distance mellem hvert slice i mm (vi fjerner alle data punkter hvor scanning har en slice_thickness = 5.0, da denne tykkelse indikerer en udfaset CT-scanner.)
 * pixel_spacing_1: fysiske sidelængde på hver pixel i mm
 
-(pixels er kvadratiske, derfor er kun en sidelængde nødvendig)
+(pixels er kvadratiske, derfor er kun én sidelængde nødvendig)
 
-Herefter tilføjes der, for hver læsion valgt med, 11 datapunkter til linjen for hver patient:
+Herefter tilføjes der, for hver inkluderet læsion, 11 yderligere kolonner til rækken for hver patient:
 
 * hhua_i_area: Arealet af den i’te største læsion hos en patient udregnet ved antal pixels i den givne læsion ganget med kvadratet af pixel_spacing_1
 * hhua_i_dist_x1: afstanden (i mm) fra centrum af den givne læsion til venstre kant af kassen, vi har afsat omkring hjertet
@@ -62,17 +54,19 @@ Herefter tilføjes der, for hver læsion valgt med, 11 datapunkter til linjen fo
 * hhua_i_mean_pixel_value: gennemsnitlige pixel-værdi (hounsfield unit) for denne læsion
 * hhua_i_min_pixel_value: laveste pixel-værdi (hounsfield unit) for denne læsion
 
+Hvis en patient ikke har lige så mange læsioner som vi vælger at inkludere i vores dataframe, bliver disse 11 kolonner sat til at være nul.
+
 Alle disse er vist på billedet nedenfor:
 
 ![Data_opsætning](https://github.com/Skimaste/CAC/assets/132779543/05dfbca1-6bf7-4e0b-a31b-746ef72a57a2)
 
 ### PCA
-Vores eksplorative data analyse består i en PCA på vores dataframe med information fra kun én læsion per patient for lettere fortolkning. Den første læsion er også den vigtiste.
+Vores eksplorative dataanalyse består i en principal component analysis på vores dataframe med information fra kun én læsion per patient for lettere fortolkning. Den første læsion er også den vigtiste.
 Vi får følgende scree plot:
 
 ![Explained_variance](https://github.com/Skimaste/CAC/assets/132779543/8c3c62bc-59b1-4fb5-aedd-ad5bb1cf28dd)
 
-Vi ser heraf, at vi kan forklare ca. 90% af variansen med kun 8 komponenter/features, hvilket tyder på at nogle af vores features er mindre vigtige.
+Vi ser heraf, at vi kan forklare ca. 90% af variansen med kun 8 komponenter/features, hvilket tyder på at nogle af vores features er mindre vigtige end andre.
 
 ![PCA_Corelation-matrix](https://github.com/Skimaste/CAC/assets/132779543/009fb0bd-80f5-42da-8e51-f63647bd1f65)
 
@@ -86,7 +80,7 @@ Heraf ses det at PCA ikke formår at lave en klar opdeling af de to klasser. Dis
 
 ### Logistisk regression
 
-Vi vælger først at lave et dataframe med information fra alle læsioner. Det højeste antal læsioner i en patient er 158, så vi bruger zero padding på patienter med færre læsioner end dette. Ved inklusion af 158 læsioner opnår vi 1742 features.
+Vi vælger først at lave et dataframe med information fra alle læsioner. Det højeste antal læsioner i en patient er 158. Ved inklusion af 158 læsioner opnår vi 1742 features.
 
 Vi laver først et plot af standardafvigelsen for hver feature:
 
@@ -94,13 +88,15 @@ Vi laver først et plot af standardafvigelsen for hver feature:
 
 Vi ser heraf at fordelingen er heterogen, så vi vil derfor standardisere vores data med Sklearns standardscaler som bruger formlen $$z = (x - u) / s,$$ hvor u er mean og s er standardafvigelsen. 
 
-Vi ser desuden at fordelingen af de to klasser er skæv:
+Vi ser desuden, at fordelingen af de to klasser er skæv:
 
 ![Distributaion_of_classes](https://github.com/Skimaste/CAC/assets/132779543/5189f764-28e1-4dbf-9159-789aef425b32)
 
-Dette viser os, at en naiv model, som prædikterer nul hver gang, vil være korrekt ca. 85% af tiden. Dette ville give en lav loss for vores model, så for at undgå at vores model også gætter nul på alle patienter tilføjer vi class weights, som vægter minoritetsklassen mere. Dette gør at vores loss funktion bliver "straffet" ekstra ved falske negative. Vi vælger her at lave balancerede class weights, så vi heller ikke får for mange falske positive. Disse udregnes med formlen weight_for_class_i = total_samples / (num_samples_in_class_i * num_classes).
+Dette viser os, at en naiv model, som prædikterer nul hver gang, vil være korrekt ca. 85% af tiden. Dette ville give en lav loss for vores model, så for at undgå at vores model også gætter nul på alle patienter tilføjer vi class weights, som vægter minoritetsklassen højere. Dette gør, at vores loss funktion bliver "straffet" hårdere ved falske negative. Vi vælger her at lave balancerede class weights, så vi heller ikke får for mange falske positive. Disse udregnes med formlen weight_for_class_i = total_samples / (num_samples_in_class_i * num_classes).
 
-Ud af de 1742 features forventer vi at kun nogle få af disse faktisk har en indflydelse på vores model, så vi tilføjer lasso regularization (l1 regularization) i vores logistiske regressionsmodel for at tvinge nogle af vores weights til at være nul. For at finde den optimale regularization-styrke bruger vi 10-fold crossvalidation og vælger den værdi som giver den laveste test loss:
+Ud af de 1742 features forventer vi, at kun nogle få af disse faktisk har en indflydelse på vores model, så vi tilføjer lasso regularization (l1 regularization) i vores logistiske regressionsmodel for at tvinge nogle af vores weights til at være nul. Dette kan hjælpe vores model med at undgå overfitting. 
+
+For at finde den optimale regularization-styrke bruger vi 10-fold crossvalidation og vælger den værdi som giver den laveste test loss:
 
 ![Logistic_regularization_strength](https://github.com/Skimaste/CAC/assets/132779543/a68e8c47-3587-4055-9c7b-4a9944e2fd70)
 
@@ -117,17 +113,17 @@ Denne cutoff værdi giver os følgende confusion matrix for vores test set:
 
 ![Logistic_confusion_matrix](https://github.com/Skimaste/CAC/assets/132779543/92b9f968-15e0-48c4-910e-d20e134858ca)
 
-Efter at have kigget på vores models endelige weights, ser vi at mange weights er 0, og vi kan konkludere at vi kun har brug for information fra 29 lesions for at få nøjagtig de samme resultater:
+Efter at have kigget på vores models endelige weights, ser vi som forventet at mange weights er 0, og vi kan konkludere, at vi kun har brug for information fra de første 29 læsioner for at få nøjagtig de samme resultater:
 
 ![Logistic_confusion_matrix_29_lesions](https://github.com/Skimaste/CAC/assets/132779543/05881de9-8384-47f7-bd40-724bb2ab28c2)
 
-Vi ser heraf at vores model med 323 features klarer sig lige så godt som modellen med 1742. Vi kan altså reducere antallet af features med mere end 80% uden at det går udover nøjagtigheden. Dette giver god mening da læsionerne er sorteret efter størst betydning først, og efter et bestemt antal læsioner er modellen i stand til at vide om der er åreforkalkning eller ej. Samtidig er der heller ikke så mange patienter med flere end 29 læsioner.
+Vi ser heraf, at vores model med 323 features klarer sig lige så godt som modellen med 1742. Vi kan altså reducere antallet af features med mere end 80% uden at det går udover nøjagtigheden. Dette giver god mening da læsionerne er sorteret efter størst betydning først, og efter et bestemt antal læsioner er modellen i stand til at vide om der er åreforkalkning eller ej. Samtidig er der heller ikke så mange patienter med flere end 29 læsioner.
 
-I en logistisk regressionsmodel som denne, som er hurtig at træne og teste kan vi sagtens bruge alle 1742 features uden problemer, men når vi skal opbygge vores neurale netværk er dette en brugbar information, da neurale netværk er meget langsommere at træne og har let ved at overfitte ved høj-dimensionel data. 
+I en logistisk regressionsmodel som denne, som er hurtig at træne og teste kan vi sagtens bruge alle 1742 features uden problemer, men når vi skal opbygge vores neurale netværk er dette en brugbar information, da neurale netværk er væsentligt langsommere at træne og har let ved at overfitte ved høj-dimensionel data. 
 
 ### Neuralt Netværk
 
-Givet resultaterne fra vores afsnit med logistisk regression vælger vi at bruge features fra kun de 29 vigtigste læsioner i hver patient. Derudover så vi at lasso regularization havde en gavnlig effekt på vores gennemsnitlige loss, så vi tilføjer også lasso regularization til vores neurale netværk med default styrken 0.01. 
+Givet resultaterne fra vores afsnit med logistisk regression vælger vi at bruge features fra kun de 29 vigtigste læsioner i hver patient. Derudover så vi at lasso regularization (l1) havde en gavnlig effekt på vores gennemsnitlige loss, så vi tilføjer også lasso regularization til vores neurale netværk med default styrken 0.01. 
 
 Ved opbygning af netværket starter vi først med et enkelt skjult lag med 16 neuroner og får følgende kurver:
 
@@ -141,19 +137,19 @@ Vi tilføjer et skjult lag mere:
 ![2hidden_acc](https://github.com/Skimaste/CAC/assets/132779543/75dc741e-19fc-42ad-9602-f4a022295860)
 
 Vi ser at denne model opnår en højere test accuracy, men den overfitter stadig. 
-For at undgå overfitting tilføjer vi dropout med en sandsynlighed på 20% for at en neuron er slukket i træningsfasen.
-Dette giver os følgende kurver:
+For at undgå overfitting tilføjer vi dropout med en rate på 0.2. Dette vil sige, at der er 20% sandsynlighed for at en neuron i netværket er slukket for hver iteration i træningsfasen.
+Dette hjælper modellen med at generalisere sig bedre:
 
 ![2hidden_dropout_loss](https://github.com/Skimaste/CAC/assets/132779543/4662a1d8-ada1-4837-8cad-3ddf067de714)
 ![2hidden_dropout_acc](https://github.com/Skimaste/CAC/assets/132779543/ebfa0d78-780a-42c6-a290-9badcbf7adbe)
 
 Vi ser at modellen ikke længere overfitter, så vi holder os til to skjulte lag og udforsker nu de andre hyperparametre.
 
-Vi laver, på samme vis som i vores afsnit med logistisk regression, 5-fold crossvalidation for at teste forskellige styrker af lasso regularization:
+Vi laver, på samme vis som i vores afsnit med logistisk regression, crossvalidation for at teste forskellige styrker af lasso regularization:
 
 ![neural_network_L1_cv-1](https://github.com/Skimaste/CAC/assets/132779543/d93186dd-ff7a-4cef-afc1-868190a0d364)
 
-Vi ser heraf at standardstyken på 0.01 giver et meget godt tradeoff mellem lav test error og minimal overfitting, så vi vælger at beholde vores lasso regularization styrke på 0.01.
+Vi ser heraf at standardstyken på 0.01 giver et meget godt tradeoff mellem en lav test error og minimal overfitting, så vi vælger at beholde vores lasso regularization styrke på 0.01.
 
 Vi har derudover fundet, at det optimale antal neuroner i de skjulte lag er henholdsvis 32 og 16. Til slut har vi valgt at sænke learning rate til 0.0002 og øget antal af epochs til 1000. Med disse optimeringer får vi følgende kurver for vores færdige model:
 
@@ -170,7 +166,7 @@ Dette giver os følgende confusion matrix for vores test set:
 
 <img width="375" alt="neural_network_cm-1" src="https://github.com/Skimaste/CAC/assets/132779543/bfc7df4b-831e-4ddb-94df-6a47c52c0cd7">
 
-Vores neurale netværk får altså 3 færre falske positive sammenlignet med den logistiske regressionsmodel på det udvalgte random_state af train/test splittet. Dette er ikke den store forbedring, men vi vil nu se hvordan de to forskellige modeller klarer sig på det afgørende test data.
+Vores neurale netværk får altså 3 færre falske positive sammenlignet med den logistiske regressionsmodel på det udvalgte random_state af train/test splittet. Dette er ikke en stor forbedring, men vi vil nu se hvordan de to forskellige modeller klarer sig på det afgørende test data.
 
 ### Konklusion
 
@@ -198,14 +194,6 @@ Repositoryet er struktureret som følger:
 - `images/`: Gemmer billeder af modelvurderinger og visualiseringer.
 - `models/`: Gemmer trænede modeller til fremtidig brug.
 
-## Kom godt i gang
-
-For at komme i gang med projektet skal du følge disse trin:
-
-1. Klon repositoryet til din lokale maskine ved hjælp af `git clone`.
-2. Udforsk mappen `code/` for at forstå projektets struktur og funktionaliteter.
-3. Se dokumentationen i mappen `docs/` for detaljerede oplysninger om data, metode og resultater.
-
 ## Bidragydere
 
 - Frederik Nordberg Jensen
@@ -215,7 +203,3 @@ For at komme i gang med projektet skal du følge disse trin:
 ## Licens
 
 Dette projekt er licenseret under [MIT-licensen](LICENSE).
-
----
-
-Ved eventuelle spørgsmål eller problemer bedes du kontakte projektets vedligeholdere. Vi byder bidrag og feedback velkommen for at forbedre projektet yderligere. Tak for din interesse og støtte!
