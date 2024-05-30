@@ -181,6 +181,7 @@ På det afgørende test data får vi for den logistiske regressionsmodel følgen
 <img width="375" alt="test_logistic_cm" src="https://github.com/Skimaste/CAC/assets/132779543/59d88ef9-347f-4bab-bf62-238bff211f05">
 
 Og for det neurale netværk:
+
 <img width="375" alt="test_nn_cm-1" src="https://github.com/Skimaste/CAC/assets/132779543/47994616-53cd-4430-8068-3491f1062425">
 
 Vi ser heraf, at det neurale netværk klarer sig væsentligt bedre end den logistiske regressionsmodel i forhold til antallet af falske negative.
