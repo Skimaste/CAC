@@ -39,7 +39,8 @@ vi kigger på listen af pixels for hver læsion og finder min, max og mean af pi
 ### PCA
 Vores eksplorative data analyse består i en PCA på vores dataframe med information fra kun én læsion per patient for lettere fortolkning.
 Vi får heraf følgende scree plot:
-![Scree Plot](images/Explained_variance.png)
+![Explained_variance](https://github.com/Skimaste/CAC/assets/132779543/8c3c62bc-59b1-4fb5-aedd-ad5bb1cf28dd)
+
 
 
 ### Logistisk regression
