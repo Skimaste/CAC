@@ -66,10 +66,7 @@ Herefter tilføjes der, for hver læsion valgt med, 11 datapunkter til linjen fo
 
 Alle disse er vist på billedet nedenfor:
 
-https://github.com/Skimaste/CAC/blob/main/images/Data_opsætning.png?raw=true![image](https://github.com/Skimaste/CAC/assets/43986852/9c519bfc-a166-4162-bdaa-5191e8a8ffec)
-
-
-
+![Data_opsætning](https://github.com/Skimaste/CAC/assets/132779543/05dfbca1-6bf7-4e0b-a31b-746ef72a57a2)
 
 ### PCA
 Vores eksplorative data analyse består i en PCA på vores dataframe med information fra kun én læsion per patient for lettere fortolkning. Den første læsion er også den vigtiste.
