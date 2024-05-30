@@ -72,6 +72,11 @@ Dette viser os, at en naiv model, som prædikterer nul hver gang, vil være korr
 
 Ud af de 1742 features forventer vi at kun nogle få af disse faktisk har en indflydelse på vores model, så vi tilføjer lasso regression (l1 regression) i vores logistiske regressionsmodel for at tvinge nogle af vores weights til at være nul. For at finde den optimale regressions-styrke bruger vi 10-fold crossvalidation og vælger den værdi som giver den laveste test loss:
 
+![Logistic_regularization_strength](https://github.com/Skimaste/CAC/assets/132779543/a68e8c47-3587-4055-9c7b-4a9944e2fd70)
+
+Med dette in mente opbygger vi vores logistiske regressionsmodel ved at opdele vores data i 80% træningsdata og 20% testdata. Vi bruger den samme random_state igennem vores projekt så vi kan sammenligne resultater bedre. 
+
+Efter træning af vores model vil vi finde den cutoff værdi som giver det bedste trade-off mellem de forskellige metrics:
 
 
 
