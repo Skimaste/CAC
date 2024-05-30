@@ -165,6 +165,14 @@ Vi har derudover fundet, at det optimale antal neuroner i de skjulte lag er henh
 Disse hyperparametre giver en pæn og stabil kurve i både loss og accuracy, og der ses ingen tegn på overfitting.
 Vi vil nu, på samme vis som i logistisk regression, vælge den optimale cutoff værdi:
 
+![neural_network_cutoff](https://github.com/Skimaste/CAC/assets/132779543/7861d536-37e0-4873-aa1b-c6972290f01f)
+
+Vi vælger her et offset på 0.03, hvilket giver os en cutoff værdi på 0.5 - 0.03 = 0.47.
+Dette giver os følgende confusion matrix for vores test set:
+
+
+
+
 
 
 
