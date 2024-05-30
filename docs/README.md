@@ -89,9 +89,10 @@ Denne cutoff værdi giver os følgende confusion matrix for vores test set:
 
 Efter at have kigget på vores models endelige weights, ser vi at mange weights er 0, og vi kan konkludere at vi kun har brug for information fra 29 lesions for at få nøjagtig de samme resultater:
 
+![Logistic_confusion_matrix_29_lesions](https://github.com/Skimaste/CAC/assets/132779543/05881de9-8384-47f7-bd40-724bb2ab28c2)
 
-
-
+Vi ser heraf at vores model med 323 features klarer sig lige så godt som modellen med 1742. Vi kan altså reducere antallet af features med mere end 80% uden at det går udover nøjagtigheden. 
+I en logistisk regressionsmodel som denne, som er hurtig at træne og teste kan vi sagtens bruge alle 1742 features uden problemer, men når vi skal opbygge vores neurale netværk er dette en brugbar information, da neurale netværk er meget langsommere at træne og har let ved at overfitte ved høj-dimensionel data. 
 
 ### Neuralt Netværk
 
