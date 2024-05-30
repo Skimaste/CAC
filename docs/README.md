@@ -181,10 +181,14 @@ På det afgørende test data får vi for den logistiske regressionsmodel følgen
 <img width="375" alt="test_logistic_cm" src="https://github.com/Skimaste/CAC/assets/132779543/59d88ef9-347f-4bab-bf62-238bff211f05">
 
 Og for det neurale netværk:
+<img width="375" alt="test_nn_cm-1" src="https://github.com/Skimaste/CAC/assets/132779543/47994616-53cd-4430-8068-3491f1062425">
 
+Vi ser heraf, at det neurale netværk klarer sig væsentligt bedre end den logistiske regressionsmodel i forhold til antallet af falske negative.
+Vi får stadig kun en accuracy på 89%, men kigger vi på de patienter som vores model prædikterer som falske negative, ses det at disse patienter har en forholdsvis lav agatston score, som ikke er langt over 100, så disse patienter er ikke så kritiske at overse. Alle patienter med en kritisk høj agatston score bliver altså opfanget af modellen.
 
+Samtidig tilhører mange af de falske positive prædiktioner de patienter som ligger lige på den anden side af grænsen. Kun 15 af de falske positive har en agatston score på 0. 
 
-
+Alt i alt ses det, at hvis vores model prædikterer et nul, så er der 98.3% chance for at vedkommende er rask (agatston score < 100), mens hvis vores model prædikterer et 1, så er der 53.8% chance for at vedkommende faktisk har åreforkalkning svarende til en agatston score større end 100. 
 
 ## Repositorystruktur
 
