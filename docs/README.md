@@ -102,6 +102,13 @@ Givet resultaterne fra vores afsnit med logistisk regression vælger vi at bruge
 Ved opbygning af netværket starter vi først med et enkelt skjult lag med 16 neuroner og får følgende kurver:
 
 ![1hidden_loss](https://github.com/Skimaste/CAC/assets/132779543/3da2a93c-d1ad-42c2-bea4-e826f7f5ad2c)
+![1hidden_acc](https://github.com/Skimaste/CAC/assets/132779543/4713c28b-f1e8-4c0c-9b90-8f6d0ec5f6a7)
+
+Dette giver umiddelbart gode resultater, men det ses også at modellen overfitter. 
+Vi tilføjer et skjult lag mere:
+
+
+
 
 
 
