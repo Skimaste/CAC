@@ -62,9 +62,16 @@ Vi laver først et plot af standardafvigelsen for hver feature:
 
 ![Standard_deviation_feautures](https://github.com/Skimaste/CAC/assets/132779543/4014ca18-ee11-420d-8c3f-5a93f5a7012f)
 
-Vi ser heraf at fordelingen er heterogen, så vi vil derfor standardisere vores data med Sklearns standardscaler som bruger formlen z = (x - u) / s, hvor u er mean og s er standardafvigelsen. 
+Vi ser heraf at fordelingen er heterogen, så vi vil derfor standardisere vores data med Sklearns standardscaler som bruger formlen $$z = (x - u) / s,$$ hvor u er mean og s er standardafvigelsen. 
 
 Vi ser desuden at fordelingen af de to klasser er skæv:
+
+![Distributaion_of_classes](https://github.com/Skimaste/CAC/assets/132779543/5189f764-28e1-4dbf-9159-789aef425b32)
+
+Dette viser os, at en naiv model, som prædikterer nul hver gang, vil være korrekt ca. 85% af tiden. Dette ville give en lav loss for vores model, så for at undgå at vores model også gætter nul på alle patienter tilføjer vi class weights, som vægter minoritetsklassen mere. Dette gør at vores loss funktion bliver "straffet" ekstra ved falske negative. Vi vælger her at lave balancerede class weights, så vi heller ikke får for mange falske positive. Disse udregnes med formlen weight_for_class_i = total_samples / (num_samples_in_class_i * num_classes).
+
+Ud af de 1742 features forventer vi at kun nogle få af disse faktisk har en indflydelse på vores model, så vi tilføjer lasso regression (l1 regression) i vores logistiske regressionsmodel for at tvinge nogle af vores weights til at være nul. For at finde den optimale regressions-styrke bruger vi 10-fold crossvalidation og vælger den værdi som giver den laveste test loss:
+
 
 
 
