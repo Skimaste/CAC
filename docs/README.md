@@ -6,7 +6,7 @@ Dette repository indeholder koden og de tilhørende modeller til projektet "Koro
 
 ### Overblik
 
-Projektet fokuserer på at lave opportunistisk screening ved at analysere CT-scanningsdata af kvinder, der gennemgår behandling for brystkræft. Målet er, ved brug af machine learning, at vurdere tilstanden af koronararterieforkalkning (åreforkalkning i hjertet) ud fra denne data og tilnærme patienternes Agatston-score. Agatston-scoren er en måleenhed inden for kardiologi, der angiver den samlede volumen og densitet af calciumaflejringer i hjertets arterier. En højere Agatston-score indikerer en større risiko for hjerteproblemer.
+Projektet fokuserer på at lave opportunistisk screening ved at analysere CT-scanningsdata af kvinder, der gennemgår behandling for brystkræft. Målet er, ved brug af machine learning, at vurdere graden af koronararterieforkalkning (åreforkalkning i hjertet) ud fra disse billeddata og tilnærme patienternes Agatston-score. Agatston-scoren er en måleenhed inden for kardiologi, der angiver den samlede volumen og densitet af kalkaflejringer i hjertets arterier. En højere Agatston-score indikerer en større risiko for hjerteproblemer.
 
 Udover den medfødte risiko kan koronararterieforkalkning give udfordringer under strålebehandling for brystkræft. Hvis de ydre arterier i hjertet er forkalkede, øges risikoen for hjertesygdomme betydeligt på grund af udsættelse for stråling. Derfor kan tilpasning af strålebehandlingen være gavnlig i visse tilfælde.
 
@@ -14,15 +14,15 @@ Dog er evaluering af koronar forkalkning ikke en standardpraksis i denne sammenh
 
 ### Videnskabelig problemformulering
 
-Det primære mål er at udvikle en model, der kan forudsige brystkræftpatienters Agatston-score nøjagtigt og kategorisere dem i to risikokategorier baseret på scoren. Her har vi først forsøgt os med en logistisk model og efterfølgende et neuralt netværk til at forudsige hvilken af de to kategorier de høre til.
+Det primære mål er at udvikle en model, der kan forudsige brystkræftpatienters Agatston-score og kategorisere dem i to risikokategorier baseret på scoren. Her har vi først forsøgt os med en logistisk model og efterfølgende et neuralt netværk til at forudsige hvilken af de to kategorier de hører til.
 
 ### Beskrivelse af data
 
-Datasættet består af automatisk udtrukne oplysninger fra cirka 1300 CT-scanninger af brystkræftpatienter. Disse scanninger består af hundreder af 2D tværsnit eller "slices". En maskine har automatisk behandlet disse slices for hver patient, segmenteret hjertet og identificeret pixels med en Houndsfield-enhed (HU) større end 130. HU er en måleenhed for radiodensitet i en CT-scanning, hvor pixels med lav HU svarer til blødt væv og muskelmasse, mens calcium og knoglemasse har en HU større end 130. Derudover er der manuelt afledte funktioner, herunder Agatston-scoren, tildelt af en vejledende kliniker baseret på en grundig undersøgelse af CT-billederne.
+Datasættet består af automatisk udtrukne data fra cirka 1300 CT-scanninger af brystkræftpatienter. Disse scanninger består af hundredevis af 2D tværsnit eller "slices". En model har automatisk behandlet disse slices for hver patient, segmenteret hjertet og identificeret pixels med en Houndsfield-enhed (HU) større end 130. HU er en måleenhed for radiodensitet i en CT-scanning, hvor pixels med lav HU svarer til blødt væv og muskelmasse, mens calcium og knoglemasse har en HU større end 130. Derudover er der manuelt afledte features, herunder Agatston-scoren, tildelt af en vejledende kliniker baseret på en grundig undersøgelse af CT-billederne.
 
 ### Udfordringer med data
 
-Udfordringer opstår, fordi CT-scanningerne ikke blev taget specifikt til dette formål, hvilket fører til varierende klarhed af hjertebillederne sammenlignet med standard hjerte-CT-scanninger. Problemer såsom bevægelsesartefakter og forvrængninger fra medicinske implantater kan påvirke nøjagtigheden af den automatiske funktionsekstraktionsproces og potentielt føre til falske positive for koronar forkalkning.
+Udfordringer opstår, fordi CT-scanningerne ikke er blevet taget specifikt til dette formål, hvilket fører til varierende klarhed af hjertet sammenlignet med standard hjerte-CT-scanninger. Problemer såsom bevægelsesartefakter og forvrængninger fra medicinske implantater (f.eks. pacemaker) kan påvirke nøjagtigheden af den automatiske funktionsekstraktionsproces og potentielt føre til falske positive for koronar forkalkning.
 
 ### Projektmål
 
@@ -34,7 +34,7 @@ Repositoryet er struktureret som følger:
 
 - `code/`: Indeholder koden til dataforbehandling, modeltræning og evaluering.
 - `docs/`: Indeholder projektets dokumentation, herunder denne README-fil.
-- `results/`: Gemmer resultaterne af modelvurderinger og eventuelle visualiseringer.
+- `images/`: Gemmer billeder af modelvurderinger og visualiseringer.
 - `models/`: Gemmer trænede modeller til fremtidig brug.
 
 ## Kom godt i gang
@@ -42,9 +42,8 @@ Repositoryet er struktureret som følger:
 For at komme i gang med projektet skal du følge disse trin:
 
 1. Klon repositoryet til din lokale maskine ved hjælp af `git clone`.
-2. Installer de nødvendige afhængigheder angivet i `requirements.txt`.
-3. Udforsk mappen `code/` for at forstå projektets struktur og funktionaliteter.
-4. Henvis til dokumentationen i mappen `docs/` for detaljerede oplysninger om data, metode og resultater.
+2. Udforsk mappen `code/` for at forstå projektets struktur og funktionaliteter.
+3. Se dokumentationen i mappen `docs/` for detaljerede oplysninger om data, metode og resultater.
 
 ## Bidragydere
 
