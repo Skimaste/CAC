@@ -108,6 +108,14 @@ Dette giver umiddelbart gode resultater, men det ses også at modellen overfitte
 Vi tilføjer et skjult lag mere:
 
 ![2hidden_loss](https://github.com/Skimaste/CAC/assets/132779543/9adca6cb-28e4-4bd3-9cab-7efeabae5185)
+![2hidden_acc](https://github.com/Skimaste/CAC/assets/132779543/75dc741e-19fc-42ad-9602-f4a022295860)
+
+Vi ser at denne model opnår en højere test accuracy, men den overfitter stadig. 
+For at undgå overfitting tilføjer vi dropout med en sandsynlighed på 20% for at en neuron er slukket i træningsfasen.
+Dette giver os følgende kurver:
+
+
+
 
 
 
