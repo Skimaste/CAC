@@ -83,7 +83,14 @@ Efter træning af vores model vil vi finde den cutoff værdi som giver det bedst
 Et cutoff offset på 0.0 svarer til standard cutoff-værdien 0.5, og cutoff værdien udregnes 0.5 - cutoff_offset.
 Givet plottet ser vi det bedste trade-off ved offset = -0.083. Dette giver os en cutoff værdi på 0.5 - (-0.083) = 0.583.
 
-Denne cutoff værdi giver os følgende confusion matrix:
+Denne cutoff værdi giver os følgende confusion matrix for vores test set:
+
+![Logistic_confusion_matrix](https://github.com/Skimaste/CAC/assets/132779543/92b9f968-15e0-48c4-910e-d20e134858ca)
+
+Efter at have kigget på vores models endelige weights, ser vi at mange weights er 0, og vi kan konkludere at vi kun har brug for information fra 29 lesions for at få nøjagtig de samme resultater:
+
+
+
 
 
 ### Neuralt Netværk
