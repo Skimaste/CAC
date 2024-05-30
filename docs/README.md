@@ -115,13 +115,11 @@ For at undgå overfitting tilføjer vi dropout med en sandsynlighed på 20% for 
 Dette giver os følgende kurver:
 
 ![2hidden_dropout_loss](https://github.com/Skimaste/CAC/assets/132779543/4662a1d8-ada1-4837-8cad-3ddf067de714)
+![2hidden_dropout_acc](https://github.com/Skimaste/CAC/assets/132779543/ebfa0d78-780a-42c6-a290-9badcbf7adbe)
 
+Vi ser at modellen ikke længere overfitter, så vi holder os til to skjulte lag og udforsker nu de andre hyperparametre.
 
-
-
-
-
-
+Vi laver, på samme vis som i vores afsnit med logistisk regression, 5-fold crossvalidation for at teste forskellige styrker af lasso regression:
 
 
 
