@@ -91,10 +91,16 @@ Efter at have kigget på vores models endelige weights, ser vi at mange weights 
 
 ![Logistic_confusion_matrix_29_lesions](https://github.com/Skimaste/CAC/assets/132779543/05881de9-8384-47f7-bd40-724bb2ab28c2)
 
-Vi ser heraf at vores model med 323 features klarer sig lige så godt som modellen med 1742. Vi kan altså reducere antallet af features med mere end 80% uden at det går udover nøjagtigheden. 
+Vi ser heraf at vores model med 323 features klarer sig lige så godt som modellen med 1742. Vi kan altså reducere antallet af features med mere end 80% uden at det går udover nøjagtigheden. Dette giver god mening da læsionerne er sorteret efter størst betydning først, og efter et bestemt antal læsioner er modellen i stand til at vide om der er åreforkalkning eller ej. Samtidig er der heller ikke så mange patienter med flere end 29 læsioner.
+
 I en logistisk regressionsmodel som denne, som er hurtig at træne og teste kan vi sagtens bruge alle 1742 features uden problemer, men når vi skal opbygge vores neurale netværk er dette en brugbar information, da neurale netværk er meget langsommere at træne og har let ved at overfitte ved høj-dimensionel data. 
 
 ### Neuralt Netværk
+
+Givet resultaterne fra vores afsnit med logistisk regression vælger vi at bruge features fra kun de 29 vigtigste læsioner i hver patient. Derudover så vi at lasso regression havde en gavnlig effekt på vores gennemsnitlige loss, så vi tilføjer også lasso regression til vores neurale netværk med default styrken 0.01. 
+
+Ved opbygning af netværket starter vi først med et enkelt skjult lag med 16 neuroner og får følgende kurver:
+
 
 ### Konklusion
 
