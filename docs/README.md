@@ -42,7 +42,7 @@ Vi får følgende scree plot:
 
 ![Explained_variance](https://github.com/Skimaste/CAC/assets/132779543/8c3c62bc-59b1-4fb5-aedd-ad5bb1cf28dd)
 
-Vi ser heraf, at vi kan forklare ca. 90% af variansen med kun 8 komponenter/features, hvilket tyder på at nogle af vores features ikke er nødvendige.
+Vi ser heraf, at vi kan forklare ca. 90% af variansen med kun 8 komponenter/features, hvilket tyder på at nogle af vores features er mindre vigtige.
 
 ![PCA_Corelation-matrix](https://github.com/Skimaste/CAC/assets/132779543/009fb0bd-80f5-42da-8e51-f63647bd1f65)
 
@@ -50,12 +50,17 @@ Af korrelation plottet ser vi en stærk korrelation mellem det totale antal pixe
 
 Til sidst ses har vi lavet et biplot: 
 
+![PCA_bi-plot](https://github.com/Skimaste/CAC/assets/132779543/1713f668-ee3b-4d68-a24f-b42cb2298706)
 
-
-
-
+Heraf ses det at PCA ikke formår at lave en klar opdeling af de to klasser. Disse resultater fortæller os at vi ikke vil få meget gavn af dimensionsreducering, da de fleste af vores features er nødvendige til at forklare variansen, og PCA vil derfor potentielt set sænke vores models nøjagtighed. Vi vælger derfor ikke at bruge PCA i vores logistiske regressionsmodel.
 
 ### Logistisk regression
+
+Vi vælger først at lave et dataframe med information fra alle læsioner. Det højeste antal læsioner i en patient er 158, så vi bruger zero padding på patienter med færre læsioner end dette. Ved inklusion af 158 læsioner opnår vi 1742 features.
+
+Vi laver først et plot af standardafvigelsen for hver feature:
+
+
 
 ### Neuralt Netværk
 
