@@ -107,6 +107,10 @@ Ved opbygning af netværket starter vi først med et enkelt skjult lag med 16 ne
 Dette giver umiddelbart gode resultater, men det ses også at modellen overfitter. 
 Vi tilføjer et skjult lag mere:
 
+![2hidden_loss](https://github.com/Skimaste/CAC/assets/132779543/9adca6cb-28e4-4bd3-9cab-7efeabae5185)
+
+
+
 
 
 
