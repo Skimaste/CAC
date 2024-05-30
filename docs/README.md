@@ -74,10 +74,16 @@ Ud af de 1742 features forventer vi at kun nogle få af disse faktisk har en ind
 
 ![Logistic_regularization_strength](https://github.com/Skimaste/CAC/assets/132779543/a68e8c47-3587-4055-9c7b-4a9944e2fd70)
 
-Med dette in mente opbygger vi vores logistiske regressionsmodel ved at opdele vores data i 80% træningsdata og 20% testdata. Vi bruger den samme random_state igennem vores projekt så vi kan sammenligne resultater bedre. 
+Med dette in mente opbygger vi vores logistiske regressionsmodel ved at opdele vores data i 80% træningsdata og 20% testdata. Vi bruger den samme random_state igennem vores projekt så vi kan sammenligne vores modeller bedre. 
 
-Efter træning af vores model vil vi finde den cutoff værdi som giver det bedste trade-off mellem de forskellige metrics:
+Efter træning af vores model vil vi finde den cutoff værdi som giver det bedste trade-off mellem accuracy, specificity og sensitivity. Dette har vi gjort ved at teste 25 forskellige cutoff-offsets og plottet resultaterne:
 
+![Cutoff_logistic](https://github.com/Skimaste/CAC/assets/132779543/017c5902-3762-447d-a941-66887b4da67b)
+
+Et cutoff offset på 0.0 svarer til standard cutoff-værdien 0.5, og cutoff værdien udregnes 0.5 - cutoff_offset.
+Givet plottet ser vi det bedste trade-off ved offset = -0.083. Dette giver os en cutoff værdi på 0.5 - (-0.083) = 0.583.
+
+Denne cutoff værdi giver os følgende confusion matrix:
 
 
 ### Neuralt Netværk
