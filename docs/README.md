@@ -64,6 +64,11 @@ Herefter tilføjes der, for hver læsion valgt med, 11 datapunkter til linjen fo
 * hhua_i_mean_pixel_value: gennemsnitlige pixel-værdi (hounsfield unit) for denne læsion
 * hhua_i_min_pixel_value: laveste pixel-værdi (hounsfield unit) for denne læsion
 
+Alle disse er vist på billedet nedenfor:
+
+https://github.com/Skimaste/CAC/blob/main/images/Data_opsætning.png?raw=true![Uploading image.png…]()
+
+
 
 ### PCA
 Vores eksplorative data analyse består i en PCA på vores dataframe med information fra kun én læsion per patient for lettere fortolkning. Den første læsion er også den vigtiste.
