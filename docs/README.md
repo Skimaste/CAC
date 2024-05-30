@@ -170,6 +170,9 @@ Vi vil nu, på samme vis som i logistisk regression, vælge den optimale cutoff 
 Vi vælger her et offset på 0.03, hvilket giver os en cutoff værdi på 0.5 - 0.03 = 0.47.
 Dette giver os følgende confusion matrix for vores test set:
 
+![neural_network_cm](https://github.com/Skimaste/CAC/assets/132779543/3345cec5-ae8f-4eba-8a21-70e05223a24c)
+
+Der ses ikke den store 
 
 
 
