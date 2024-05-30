@@ -24,9 +24,25 @@ Datasættet består af automatisk udtrukne data fra cirka 1300 CT-scanninger af 
 
 Udfordringer opstår, fordi CT-scanningerne ikke er blevet taget specifikt til dette formål, hvilket fører til varierende klarhed af hjertet sammenlignet med standard hjerte-CT-scanninger. Problemer såsom bevægelsesartefakter og forvrængninger fra medicinske implantater (f.eks. pacemaker) kan påvirke nøjagtigheden af den automatiske funktionsekstraktionsproces og potentielt føre til falske positive for koronar forkalkning.
 
-### Projektmål
+## Resultater 
 
-Det primære mål er at give en pålidelig indikation af tilstedeværelsen af koronararterieforkalkning. Denne information kan hjælpe klinikere med at beslutte, om yderligere undersøgelse af en patients CT-scanning er berettiget. Derudover er et sekundært mål at træne et regressionsneuralt netværk til at forudsige en mere præcis Agatston-score. Dette sigter mod at give klinikere nøjagtige og håndterbare data, så de kan give tidlige advarsler til patienterne, inden potentielle hjertesygdomme udvikler sig. Projektets kode og dokumentation vil blive gjort tilgængelig på et GitHub-repository for bredere adgang.
+Gennem vores projekt
+
+### Data pipeline
+
+Vi merger vores datasæt på patient id, for at få total score og hvilke slices der er i hjertet for hver patient.
+
+vi kigger på listen af pixels for hver læsion og finder min, max og mean af pixelværdierne(hounsfield units)
+
+
+
+### PCA
+
+### Logistisk regression
+
+### Neuralt Netværk
+
+### Konklusion
 
 ## Repositorystruktur
 
