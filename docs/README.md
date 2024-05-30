@@ -102,7 +102,7 @@ Vi ser desuden at fordelingen af de to klasser er skæv:
 
 Dette viser os, at en naiv model, som prædikterer nul hver gang, vil være korrekt ca. 85% af tiden. Dette ville give en lav loss for vores model, så for at undgå at vores model også gætter nul på alle patienter tilføjer vi class weights, som vægter minoritetsklassen mere. Dette gør at vores loss funktion bliver "straffet" ekstra ved falske negative. Vi vælger her at lave balancerede class weights, så vi heller ikke får for mange falske positive. Disse udregnes med formlen weight_for_class_i = total_samples / (num_samples_in_class_i * num_classes).
 
-Ud af de 1742 features forventer vi at kun nogle få af disse faktisk har en indflydelse på vores model, så vi tilføjer lasso regression (l1 regression) i vores logistiske regressionsmodel for at tvinge nogle af vores weights til at være nul. For at finde den optimale regressions-styrke bruger vi 10-fold crossvalidation og vælger den værdi som giver den laveste test loss:
+Ud af de 1742 features forventer vi at kun nogle få af disse faktisk har en indflydelse på vores model, så vi tilføjer lasso regularization (l1 regularization) i vores logistiske regressionsmodel for at tvinge nogle af vores weights til at være nul. For at finde den optimale regularization-styrke bruger vi 10-fold crossvalidation og vælger den værdi som giver den laveste test loss:
 
 ![Logistic_regularization_strength](https://github.com/Skimaste/CAC/assets/132779543/a68e8c47-3587-4055-9c7b-4a9944e2fd70)
 
@@ -129,7 +129,7 @@ I en logistisk regressionsmodel som denne, som er hurtig at træne og teste kan 
 
 ### Neuralt Netværk
 
-Givet resultaterne fra vores afsnit med logistisk regression vælger vi at bruge features fra kun de 29 vigtigste læsioner i hver patient. Derudover så vi at lasso regression havde en gavnlig effekt på vores gennemsnitlige loss, så vi tilføjer også lasso regression til vores neurale netværk med default styrken 0.01. 
+Givet resultaterne fra vores afsnit med logistisk regression vælger vi at bruge features fra kun de 29 vigtigste læsioner i hver patient. Derudover så vi at lasso regularization havde en gavnlig effekt på vores gennemsnitlige loss, så vi tilføjer også lasso regularization til vores neurale netværk med default styrken 0.01. 
 
 Ved opbygning af netværket starter vi først med et enkelt skjult lag med 16 neuroner og får følgende kurver:
 
@@ -151,7 +151,17 @@ Dette giver os følgende kurver:
 
 Vi ser at modellen ikke længere overfitter, så vi holder os til to skjulte lag og udforsker nu de andre hyperparametre.
 
-Vi laver, på samme vis som i vores afsnit med logistisk regression, 5-fold crossvalidation for at teste forskellige styrker af lasso regression:
+Vi laver, på samme vis som i vores afsnit med logistisk regression, 5-fold crossvalidation for at teste forskellige styrker af lasso regularization:
+
+![neural_network_L1_cv-1](https://github.com/Skimaste/CAC/assets/132779543/d93186dd-ff7a-4cef-afc1-868190a0d364)
+
+Vi ser heraf at standardstyken på 0.01 giver et meget godt tradeoff mellem lav test error og minimal overfitting, så vi vælger at beholde vores lasso regularization styrke på 0.01.
+
+Vi har derudover fundet, at det optimale antal neuroner i de skjulte lag er henholdsvis 32 og 16. Til slut har vi valgt at sænke learning rate til 0.0002 og øget antal af epochs til 1000. Med disse optimeringer får vi følgende kurver for vores færdige model:
+
+
+
+
 
 
 
