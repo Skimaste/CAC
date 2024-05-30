@@ -24,9 +24,7 @@ Datasættet består af automatisk udtrukne data fra cirka 1300 CT-scanninger af 
 
 Udfordringer opstår, fordi CT-scanningerne ikke er blevet taget specifikt til dette formål, hvilket fører til varierende klarhed af hjertet sammenlignet med standard hjerte-CT-scanninger. Problemer såsom bevægelsesartefakter og forvrængninger fra medicinske implantater (f.eks. pacemaker) kan påvirke nøjagtigheden af den automatiske funktionsekstraktionsproces og potentielt føre til falske positive for koronar forkalkning.
 
-## Resultater 
-
-Gennem vores projekt
+## Gennemgang af projekt og tilhørende resultater 
 
 ### Data pipeline
 
