@@ -60,6 +60,12 @@ Vi vælger først at lave et dataframe med information fra alle læsioner. Det h
 
 Vi laver først et plot af standardafvigelsen for hver feature:
 
+![Standard_deviation_feautures](https://github.com/Skimaste/CAC/assets/132779543/4014ca18-ee11-420d-8c3f-5a93f5a7012f)
+
+Vi ser heraf at fordelingen er heterogen, så vi vil derfor standardisere vores data med Sklearns standardscaler som bruger formlen z = (x - u) / s, hvor u er mean og s er standardafvigelsen. 
+
+Vi ser desuden at fordelingen af de to klasser er skæv:
+
 
 
 ### Neuralt Netværk
