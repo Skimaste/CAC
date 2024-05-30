@@ -114,6 +114,9 @@ Vi ser at denne model opnår en højere test accuracy, men den overfitter stadig
 For at undgå overfitting tilføjer vi dropout med en sandsynlighed på 20% for at en neuron er slukket i træningsfasen.
 Dette giver os følgende kurver:
 
+![2hidden_dropout_loss](https://github.com/Skimaste/CAC/assets/132779543/4662a1d8-ada1-4837-8cad-3ddf067de714)
+
+
 
 
 
