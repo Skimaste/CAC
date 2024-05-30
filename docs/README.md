@@ -170,13 +170,18 @@ Vi vil nu, på samme vis som i logistisk regression, vælge den optimale cutoff 
 Vi vælger her et offset på 0.03, hvilket giver os en cutoff værdi på 0.5 - 0.03 = 0.47.
 Dette giver os følgende confusion matrix for vores test set:
 
-<img width="365" alt="neural_network_cm-1" src="https://github.com/Skimaste/CAC/assets/132779543/bfc7df4b-831e-4ddb-94df-6a47c52c0cd7">
+<img width="375" alt="neural_network_cm-1" src="https://github.com/Skimaste/CAC/assets/132779543/bfc7df4b-831e-4ddb-94df-6a47c52c0cd7">
 
 Vores neurale netværk får altså 3 færre falske positive sammenlignet med den logistiske regressionsmodel på det udvalgte random_state af train/test splittet. Dette er ikke den store forbedring, men vi vil nu se hvordan de to forskellige modeller klarer sig på det afgørende test data.
 
 ### Konklusion
 
 På det afgørende test data får vi for den logistiske regressionsmodel følgende resultater:
+
+<img width="375" alt="test_logistic_cm" src="https://github.com/Skimaste/CAC/assets/132779543/59d88ef9-347f-4bab-bf62-238bff211f05">
+
+Og for det neurale netværk:
+
 
 
 
