@@ -72,7 +72,7 @@ Vi ser heraf, at vi kan forklare ca. 90% af variansen med kun 8 komponenter/feat
 
 Af korrelation plottet ser vi en stærk korrelation mellem det totale antal pixels og antallet af ct slices med potentielle læsioner hvilket giver god mening. Derudover ses det at afstanden fra centeret af læsionen til hjertekonturen er parvis stærkt negativ korreleret hvilket også er forventet (hvis læsionen er tæt på den ene kant, må den være langt fra den modsatte). Til sidst ses også en stærk korellation mellem min, max og mean pixel value. 
 
-Til sidst ses har vi lavet et biplot: 
+Til sidst har vi lavet et biplot: 
 
 ![PCA_bi-plot](https://github.com/Skimaste/CAC/assets/132779543/1713f668-ee3b-4d68-a24f-b42cb2298706)
 
